@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hireminds: исправление ошибки"
+  short_description: "Полный процесс исправления ошибки в чате"
+  default_prompt: "Примени $hireminds-bugfix к описанной ошибке и проверь результат."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hireminds: функция"
+  short_description: "Полный процесс функции в текущем чате"
+  default_prompt: "Примени $hireminds-feature к согласованному изменению продукта."

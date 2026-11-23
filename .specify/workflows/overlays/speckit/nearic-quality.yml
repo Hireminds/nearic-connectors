@@ -1,0 +1,58 @@
+id: nearic-quality
+extends: speckit
+priority: 10
+enabled: true
+edits:
+- insert_before: implement
+  step:
+    id: analyze
+    command: speckit.analyze
+    integration: '{{ inputs.integration }}'
+    capture: true
+    input:
+      args: '{{ inputs.spec }}'
+- replace: implement
+  step:
+    id: implement
+    type: do-while
+    condition: '{{ steps.task-state.output.data.remaining > 0 }}'
+    max_iterations: 3
+    steps:
+    - id: build
+      command: speckit.implement
+      integration: '{{ inputs.integration }}'
+      input:
+        args: 'Work only within the approved scope. Read the current spec, plan and
+          tasks.
+
+          Review this earlier analyze report before editing implementation:
+
+          {{ steps.analyze.output.stdout }}
+
+          Resolve blocking findings in the artifacts and rerun speckit.analyze before
+
+          coding. Do not weaken requirements. If a substantive decision is needed,
+
+          leave the affected tasks incomplete and report the blocker.
+
+          On subsequent passes complete the tasks appended by convergence.
+
+          '
+    - id: converge
+      command: speckit.converge
+      integration: '{{ inputs.integration }}'
+      input:
+        args: Assess the approved scope and current artifacts; append remaining work
+          only.
+    - id: task-state
+      type: shell
+      strict: true
+      run: python3 scripts/spec-kit-task-state.py
+      output_format: json
+- insert_after: implement
+  step:
+    id: verify-complete
+    type: shell
+    strict: true
+    run: python3 scripts/spec-kit-task-state.py --require-complete
+    output_format: json

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hireminds: исследование идеи"
+  short_description: "Исследование идеи до решения о разработке"
+  default_prompt: "Примени $hireminds-assess к идее и подготовь обоснованное решение."
