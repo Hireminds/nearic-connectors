@@ -22,4 +22,6 @@ OpenAI описывает запуск onboarding skill в существующ�
 
 ## Проверено локально
 
-В Codex CLI 0.162.0 проверена справка `resume`, `plugin marketplace add` и `mcp login --no-browser`. В изолированном пустом профиле App Server той же версии ответил на `initialize` и `thread/list` с пустым списком. Это проверка доступных команд и локального протокола. Прогоны Desktop, MCP-вызова из возобновлённого CLI-разговора, входа Nearic и проверки BOX перечислены в [quickstart](quickstart.md).
+В Codex CLI 0.162.0 проверена справка `resume`, `plugin marketplace add` и `mcp login --no-browser`. В изолированном пустом профиле App Server той же версии ответил на `initialize` и `thread/list` с пустым списком. Это проверка доступных команд и локального протокола. Прогоны Desktop, входа Nearic и проверки BOX перечислены в [quickstart](quickstart.md).
+
+В синтетической проверке Codex CLI 0.162.0 доставил `params._meta.threadId` в stdio MCP при первом вызове и после `codex exec resume`. Значение совпало с ID тестового разговора в обоих вызовах с пустыми аргументами. Доверие к источнику, изоляция канала, Desktop и вход в Nearic требуют отдельных проверок. [Прогон CLI](https://github.com/Hireminds/nearic/blob/34f8559fb1f651401dfd47a51848809186265413/specs/001-device-connection/quickstart.md#проверка-адреса-codex) · [Команды CLI](https://learn.chatgpt.com/docs/developer-commands?surface=cli) · [MCP в Codex](https://learn.chatgpt.com/docs/extend/mcp?surface=cli)
